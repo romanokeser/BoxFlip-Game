@@ -1,9 +1,9 @@
-using System;
 using UnityEngine;
 
 public class PlayerOrientation : MonoBehaviour
 {
     public static Orientation CurrentOrientation;
+    private float _xScale = 0.4f;
 
     private void Awake()
     {
@@ -13,7 +13,9 @@ public class PlayerOrientation : MonoBehaviour
     private void FlipThePlayer()
     {
         CurrentOrientation = CurrentOrientation == Orientation.Left ? Orientation.Right : Orientation.Left;
-        transform.localScale = new Vector3(transform.localScale.x, -1f, transform.localScale.z);
+        _xScale = -_xScale;
+
+        transform.localScale = new Vector3(_xScale, 0.4f, 0.4f);  //hardcoded shit gotta remove 
     }
 }
 
