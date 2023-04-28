@@ -4,6 +4,7 @@ public class PlayerJump : MonoBehaviour
 {
     [SerializeField] private float _jumpTimeThreshold = 0.5f;
     [SerializeField] private float _maxJumpForce = 20f;
+    [SerializeField] private float _jumpForceUp;
     [SerializeField] private AnimationCurve _jumpCurve = AnimationCurve.Linear(0f, 0f, 1f, 1f);
     [SerializeField] private float _flipSpeed = 5f;
 
@@ -12,10 +13,12 @@ public class PlayerJump : MonoBehaviour
     private float jumpStartTime;
     private bool hasLanded;
     private bool isInAir;
+    private JumpCounter jumpCounter;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        jumpCounter = FindObjectOfType<JumpCounter>();
     }
 
     private void Update()
@@ -36,6 +39,7 @@ public class PlayerJump : MonoBehaviour
             hasLanded = false;
             rb.freezeRotation = true;
             isInAir = true;
+
         }
 
         if (Input.GetKeyUp(KeyCode.Space) && isJumping)
@@ -45,6 +49,7 @@ public class PlayerJump : MonoBehaviour
             float jumpForce = CalculateJumpForce(jumpTime);
             Jump(jumpForce);
             rb.freezeRotation = false;
+            jumpCounter.IncrementCounter();
         }
     }
 
@@ -66,7 +71,7 @@ public class PlayerJump : MonoBehaviour
         {
             xForce = jumpForce;
         }
-        rb.velocity = new Vector2(xForce, jumpForce * 2);
+        rb.velocity = new Vector2(xForce, jumpForce * _jumpForceUp);
     }
 
     private void Flip()
