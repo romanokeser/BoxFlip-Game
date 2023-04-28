@@ -46,6 +46,15 @@ public class PlayerJump : MonoBehaviour
 
     private void Jump(float jumpForce)
     {
-        rb.velocity = new Vector2(jumpForce, jumpForce);
+        float xForce = jumpForce;
+        if (PlayerOrientation.CurrentOrientation == Orientation.Left) // if player is flipped, jump to the left
+        {
+            xForce = -jumpForce;
+        }
+        else
+        {
+            xForce = jumpForce;
+        }
+        rb.velocity = new Vector2(xForce, jumpForce);
     }
 }
