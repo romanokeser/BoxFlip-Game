@@ -32,7 +32,7 @@ public class PlayerJump : MonoBehaviour
 
     private void CheckInput()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !isJumping && hasLanded)
+        if (Input.GetMouseButtonDown(0) && !isJumping && hasLanded)
         {
             isJumping = true;
             jumpStartTime = Time.time;
@@ -42,7 +42,7 @@ public class PlayerJump : MonoBehaviour
 
         }
 
-        if (Input.GetKeyUp(KeyCode.Space) && isJumping)
+        if (Input.GetMouseButtonUp(0) && isJumping)
         {
             isJumping = false;
             float jumpTime = Time.time - jumpStartTime;
@@ -52,6 +52,8 @@ public class PlayerJump : MonoBehaviour
             jumpCounter.IncrementCounter();
         }
     }
+
+
 
     private float CalculateJumpForce(float jumpTime)
     {

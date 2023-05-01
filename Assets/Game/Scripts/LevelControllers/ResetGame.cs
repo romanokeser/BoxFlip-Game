@@ -26,7 +26,7 @@ public class ResetGame : MonoBehaviour
     private void InitPlayerOrientation()
     {
         PlayerOrientation.CurrentOrientation = Orientation.Right;
-        _playerTr.localScale = new Vector3(0.4f, 0.4f, 0.4f);
+        _playerTr.localScale = new Vector3(0.2f, 0.2f, 0.2f);//hardcoded shit gotta remove ayy
     }
 
     private void ResetJumpCounter()
